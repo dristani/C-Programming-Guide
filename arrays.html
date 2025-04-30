@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e83e8c;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>11. Arrays</h1>
+            <p>Understanding arrays in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Arrays</h2>
+            <p>Arrays in C are collections of elements of the same data type stored in contiguous memory locations. They provide an efficient way to store and access multiple values of the same type.</p>
+
+            <h2>Array Types</h2>
+            <table>
+                <tr>
+                    <th>Array Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>One-dimensional</td>
+                    <td>Single row of elements</td>
+                    <td><code>int arr[5];</code></td>
+                </tr>
+                <tr>
+                    <td>Two-dimensional</td>
+                    <td>Table of elements (rows and columns)</td>
+                    <td><code>int matrix[3][3];</code></td>
+                </tr>
+                <tr>
+                    <td>Multi-dimensional</td>
+                    <td>Arrays with more than two dimensions</td>
+                    <td><code>int cube[2][3][4];</code></td>
+                </tr>
+                <tr>
+                    <td>Character Array</td>
+                    <td>Array of characters (string)</td>
+                    <td><code>char str[20];</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    // One-dimensional array
+    int numbers[5] = {1, 2, 3, 4, 5};
+    
+    // Two-dimensional array
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+    
+    // Character array (string)
+    char name[] = "C Programming";
+    
+    // Accessing array elements
+    printf("One-dimensional array:\n");
+    for(int i = 0; i < 5; i++) {
+        printf("numbers[%d] = %d\n", i, numbers[i]);
+    }
+    
+    printf("\nTwo-dimensional array:\n");
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < 3; j++) {
+            printf("matrix[%d][%d] = %d\n", i, j, matrix[i][j]);
+        }
+    }
+    
+    printf("\nCharacter array:\n");
+    printf("Name: %s\n", name);
+    
+    // Array operations
+    int sum = 0;
+    for(int i = 0; i < 5; i++) {
+        sum += numbers[i];
+    }
+    printf("\nSum of numbers array: %d\n", sum);
+    
+    // Array size
+    printf("Size of numbers array: %lu bytes\n", sizeof(numbers));
+    printf("Number of elements in numbers array: %lu\n", sizeof(numbers) / sizeof(numbers[0]));
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>int numbers[5] = {1, 2, 3, 4, 5};</code> - Declaration and initialization of a one-dimensional array</li>
+                <li><code>int matrix[2][3] = {...};</code> - Declaration and initialization of a two-dimensional array</li>
+                <li><code>char name[] = "C Programming";</code> - Declaration and initialization of a character array</li>
+                <li><code>numbers[i]</code> - Accessing array elements using index</li>
+                <li><code>sizeof(numbers)</code> - Getting the total size of the array in bytes</li>
+                <li><code>sizeof(numbers) / sizeof(numbers[0])</code> - Calculating the number of elements in the array</li>
+            </ul>
+
+            <h2>Array Characteristics</h2>
+            <ul>
+                <li>Arrays are fixed in size once declared</li>
+                <li>Array elements are stored in contiguous memory locations</li>
+                <li>Array indexing starts from 0</li>
+                <li>Arrays can be initialized at declaration time</li>
+                <li>Arrays can be passed to functions</li>
+                <li>Arrays can be multi-dimensional</li>
+                <li>Character arrays can be used to store strings</li>
+            </ul>
+
+            <h2>Array Best Practices</h2>
+            <ul>
+                <li>Always initialize arrays when possible</li>
+                <li>Use meaningful array names</li>
+                <li>Be careful with array bounds to avoid buffer overflow</li>
+                <li>Use constants for array sizes</li>
+                <li>Consider using structures for complex data</li>
+                <li>Use appropriate data types for array elements</li>
+                <li>Document array purposes and sizes</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between an array and a pointer?</p>
+                    <p>A: An array is a collection of elements of the same type, while a pointer is a variable that stores a memory address. Arrays can decay into pointers in certain contexts, but they are not the same thing.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Can I change the size of an array after declaration?</p>
+                    <p>A: No, arrays in C have a fixed size that cannot be changed after declaration. If you need a resizable array, consider using dynamic memory allocation with malloc() and realloc().</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I pass an array to a function?</p>
+                    <p>A: Arrays are passed to functions by reference (as a pointer to the first element). You can pass them using the array name, and you should also pass the size of the array as a separate parameter.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is array decay?</p>
+                    <p>A: Array decay is the process where an array is automatically converted to a pointer to its first element when used in most expressions. This happens in function calls, assignments, and other contexts.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="pointers.html">Next: Pointers</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope Rules - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e83e8c;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>10. Scope Rules</h1>
+            <p>Understanding scope rules in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Scope Rules</h2>
+            <p>Scope rules in C determine the visibility and lifetime of variables and functions within a program. Understanding scope is crucial for writing maintainable and bug-free code.</p>
+
+            <h2>Types of Scope</h2>
+            <table>
+                <tr>
+                    <th>Scope Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Block Scope</td>
+                    <td>Variables declared inside a block (within {})</td>
+                    <td><code>{ int x = 5; }</code></td>
+                </tr>
+                <tr>
+                    <td>Function Scope</td>
+                    <td>Variables declared within a function</td>
+                    <td><code>void func() { int y; }</code></td>
+                </tr>
+                <tr>
+                    <td>File Scope</td>
+                    <td>Variables declared outside all functions</td>
+                    <td><code>int global_var;</code></td>
+                </tr>
+                <tr>
+                    <td>Program Scope</td>
+                    <td>Variables declared with extern keyword</td>
+                    <td><code>extern int shared_var;</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+// File scope variable
+int global_var = 10;
+
+// Function prototype
+void function1();
+void function2();
+
+int main() {
+    // Function scope variable
+    int local_var = 5;
+    
+    printf("Global variable in main: %d\n", global_var);
+    printf("Local variable in main: %d\n", local_var);
+    
+    // Block scope
+    {
+        int block_var = 15;
+        printf("Block variable: %d\n", block_var);
+    }
+    // block_var is not accessible here
+    
+    function1();
+    function2();
+    
+    return 0;
+}
+
+void function1() {
+    // Function scope variable
+    int local_var = 20;
+    
+    printf("\nIn function1:\n");
+    printf("Global variable: %d\n", global_var);
+    printf("Local variable: %d\n", local_var);
+    
+    // Block scope
+    {
+        int block_var = 25;
+        printf("Block variable: %d\n", block_var);
+    }
+}
+
+void function2() {
+    // Function scope variable
+    int local_var = 30;
+    
+    printf("\nIn function2:\n");
+    printf("Global variable: %d\n", global_var);
+    printf("Local variable: %d\n", local_var);
+    
+    // Shadowing example
+    int global_var = 40;
+    printf("Shadowed global variable: %d\n", global_var);
+    printf("Original global variable: %d\n", ::global_var);
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>int global_var = 10;</code> - File scope variable accessible throughout the program</li>
+                <li><code>int local_var = 5;</code> - Function scope variable only accessible within main()</li>
+                <li><code>{ int block_var = 15; }</code> - Block scope variable only accessible within the block</li>
+                <li><code>int global_var = 40;</code> - Example of variable shadowing in function2()</li>
+                <li><code>::global_var</code> - Accessing the original global variable despite shadowing</li>
+            </ul>
+
+            <h2>Scope Rules and Visibility</h2>
+            <ul>
+                <li>Variables declared inside a block are only accessible within that block</li>
+                <li>Variables declared outside all functions have file scope and are accessible throughout the file</li>
+                <li>Function parameters have function scope</li>
+                <li>Local variables can shadow global variables with the same name</li>
+                <li>Variables declared with static keyword have file scope but are only accessible within their file</li>
+                <li>Variables declared with extern keyword can be accessed across multiple files</li>
+            </ul>
+
+            <h2>Scope Best Practices</h2>
+            <ul>
+                <li>Limit the scope of variables to the smallest possible block</li>
+                <li>Avoid using global variables when possible</li>
+                <li>Use meaningful variable names to avoid shadowing</li>
+                <li>Declare variables close to where they are used</li>
+                <li>Use static variables for file-specific data</li>
+                <li>Use extern for truly global data that needs to be shared across files</li>
+                <li>Document the scope and purpose of global variables</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is variable shadowing?</p>
+                    <p>A: Variable shadowing occurs when a variable declared in an inner scope has the same name as a variable in an outer scope. The inner variable "shadows" the outer one, making it temporarily inaccessible.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between static and extern variables?</p>
+                    <p>A: Static variables have file scope and are only accessible within their file, while extern variables can be accessed across multiple files. Static variables also retain their values between function calls.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Why should I avoid global variables?</p>
+                    <p>A: Global variables can make code harder to understand and maintain, as they can be modified from anywhere in the program. They can also lead to naming conflicts and make debugging more difficult.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I access a global variable that has been shadowed?</p>
+                    <p>A: In C, you can use the scope resolution operator (::) to access the global variable, or you can rename the local variable to avoid the conflict altogether.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="arrays.html">Next: Arrays</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

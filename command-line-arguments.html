@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Arguments - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>23. Command Line Arguments</h1>
+            <p>Understanding command line arguments in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Command Line Arguments</h2>
+            <p>Command line arguments allow users to pass parameters to a program when it is executed. In C, these arguments are passed to the main() function through the argc and argv parameters. argc (argument count) is the number of arguments, and argv (argument vector) is an array of strings containing the arguments.</p>
+
+            <h2>Command Line Argument Parameters</h2>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>argc</td>
+                    <td>Number of command line arguments</td>
+                    <td><code>int argc</code></td>
+                </tr>
+                <tr>
+                    <td>argv</td>
+                    <td>Array of argument strings</td>
+                    <td><code>char* argv[]</code></td>
+                </tr>
+                <tr>
+                    <td>argv[0]</td>
+                    <td>Program name</td>
+                    <td><code>"./program"</code></td>
+                </tr>
+                <tr>
+                    <td>argv[1]</td>
+                    <td>First argument</td>
+                    <td><code>"argument1"</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char* argv[]) {
+    // Basic argument handling
+    printf("Program name: %s\n", argv[0]);
+    printf("Number of arguments: %d\n", argc - 1);
+    
+    // Print all arguments
+    printf("\nArguments:\n");
+    for (int i = 1; i < argc; i++) {
+        printf("Argument %d: %s\n", i, argv[i]);
+    }
+    
+    // Argument validation example
+    if (argc < 3) {
+        printf("\nError: At least 2 arguments required\n");
+        printf("Usage: %s &lt;number&gt; &lt;operation&gt;\n", argv[0]);
+        return 1;
+    }
+    
+    // Convert string to number
+    int number = atoi(argv[1]);
+    char* operation = argv[2];
+    
+    // Process based on operation
+    if (strcmp(operation, "square") == 0) {
+        printf("\nSquare of %d is %d\n", number, number * number);
+    }
+    else if (strcmp(operation, "cube") == 0) {
+        printf("\nCube of %d is %d\n", number, number * number * number);
+    }
+    else {
+        printf("\nError: Unknown operation '%s'\n", operation);
+        printf("Valid operations: square, cube\n");
+        return 1;
+    }
+    
+    // Optional arguments example
+    int verbose = 0;
+    for (int i = 3; i < argc; i++) {
+        if (strcmp(argv[i], "-v") == 0) {
+            verbose = 1;
+        }
+    }
+    
+    if (verbose) {
+        printf("\nVerbose mode: Detailed calculation\n");
+        printf("Input number: %d\n", number);
+        printf("Selected operation: %s\n", operation);
+    }
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>argc</code> - Count of command line arguments</li>
+                <li><code>argv</code> - Array of argument strings</li>
+                <li><code>argv[0]</code> - Always contains program name</li>
+                <li><code>atoi()</code> - Converts string to integer</li>
+                <li><code>strcmp()</code> - Compares strings</li>
+                <li>Argument validation ensures correct usage</li>
+                <li>Optional arguments handled with flags</li>
+            </ul>
+
+            <h2>Command Line Argument Characteristics</h2>
+            <ul>
+                <li>Arguments passed as strings</li>
+                <li>First argument is program name</li>
+                <li>Arguments separated by spaces</li>
+                <li>Quotes can group arguments</li>
+                <li>Case-sensitive by default</li>
+                <li>Can be accessed in any order</li>
+                <li>Can be converted to other types</li>
+            </ul>
+
+            <h2>Command Line Argument Best Practices</h2>
+            <ul>
+                <li>Validate number of arguments</li>
+                <li>Provide helpful error messages</li>
+                <li>Document argument format</li>
+                <li>Handle conversion errors</li>
+                <li>Use consistent argument order</li>
+                <li>Support both short and long options</li>
+                <li>Consider using argument parsing libraries</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between argc and argv?</p>
+                    <p>A: argc is an integer that represents the number of command line arguments, while argv is an array of strings containing the actual arguments. argc is always at least 1 because argv[0] contains the program name.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I handle optional arguments?</p>
+                    <p>A: Optional arguments can be handled using flags (like -v for verbose mode) or by checking the number of arguments. Common approaches include using getopt() function or implementing custom argument parsing logic.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I pass arguments containing spaces?</p>
+                    <p>A: To pass arguments containing spaces, enclose them in quotes. For example: <code>./program "Hello World"</code> will pass "Hello World" as a single argument.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What are some common argument parsing libraries?</p>
+                    <p>A: Common C libraries for argument parsing include getopt (POSIX standard), argp (GNU), and various third-party libraries like argparse. These libraries provide more sophisticated argument handling than basic argc/argv.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="preprocessor.html">Next: Preprocessor</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

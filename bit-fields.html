@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bit Fields - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>16. Bit Fields</h1>
+            <p>Understanding bit fields in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Bit Fields</h2>
+            <p>Bit fields in C allow you to specify the number of bits that a structure member should occupy. This is particularly useful for memory optimization when working with flags, status bits, or other small data that doesn't require a full byte of storage.</p>
+
+            <h2>Bit Field Operations</h2>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Declaration</td>
+                    <td>Defining bit fields in a structure</td>
+                    <td><code>struct { unsigned int flag : 1; };</code></td>
+                </tr>
+                <tr>
+                    <td>Multiple Fields</td>
+                    <td>Multiple bit fields in one structure</td>
+                    <td><code>struct { unsigned int a:3, b:4, c:5; };</code></td>
+                </tr>
+                <tr>
+                    <td>Unnamed Fields</td>
+                    <td>Padding bits in a structure</td>
+                    <td><code>struct { unsigned int : 3; };</code></td>
+                </tr>
+                <tr>
+                    <td>Zero Width</td>
+                    <td>Forcing alignment to next unit</td>
+                    <td><code>struct { unsigned int : 0; };</code></td>
+                </tr>
+                <tr>
+                    <td>Signed Fields</td>
+                    <td>Using signed integers for bit fields</td>
+                    <td><code>struct { signed int value : 4; };</code></td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>Accessing bit field values</td>
+                    <td><code>struct.flag = 1;</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+// Structure with bit fields
+struct Status {
+    unsigned int isActive : 1;    // 1 bit for active status
+    unsigned int isAdmin : 1;     // 1 bit for admin status
+    unsigned int level : 3;       // 3 bits for level (0-7)
+    unsigned int : 3;             // 3 unused bits
+    unsigned int permissions : 4; // 4 bits for permissions
+};
+
+// Structure for date using bit fields
+struct Date {
+    unsigned int day : 5;    // 5 bits for day (1-31)
+    unsigned int month : 4;  // 4 bits for month (1-12)
+    unsigned int year : 7;   // 7 bits for year (0-127)
+};
+
+// Structure for color using bit fields
+struct Color {
+    unsigned int red : 5;    // 5 bits for red (0-31)
+    unsigned int green : 6;  // 6 bits for green (0-63)
+    unsigned int blue : 5;   // 5 bits for blue (0-31)
+};
+
+int main() {
+    // Status example
+    struct Status userStatus = {1, 0, 3, 7};
+    printf("User Status:\n");
+    printf("Active: %d\n", userStatus.isActive);
+    printf("Admin: %d\n", userStatus.isAdmin);
+    printf("Level: %d\n", userStatus.level);
+    printf("Permissions: %d\n", userStatus.permissions);
+    
+    // Date example
+    struct Date today = {15, 6, 23}; // June 15, 2023
+    printf("\nDate: %d/%d/%d\n", 
+           today.day, today.month, today.year + 2000);
+    
+    // Color example
+    struct Color color = {31, 63, 31}; // White
+    printf("\nColor (RGB): %d, %d, %d\n", 
+           color.red, color.green, color.blue);
+    
+    // Modifying bit fields
+    userStatus.isActive = 0;
+    userStatus.level = 5;
+    printf("\nModified Status:\n");
+    printf("Active: %d\n", userStatus.isActive);
+    printf("Level: %d\n", userStatus.level);
+    
+    // Size comparison
+    printf("\nSize of structures:\n");
+    printf("Status: %lu bytes\n", sizeof(struct Status));
+    printf("Date: %lu bytes\n", sizeof(struct Date));
+    printf("Color: %lu bytes\n", sizeof(struct Color));
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>unsigned int isActive : 1;</code> - 1-bit field for boolean flag</li>
+                <li><code>unsigned int level : 3;</code> - 3-bit field for level (0-7)</li>
+                <li><code>unsigned int : 3;</code> - 3-bit padding field</li>
+                <li><code>struct Date today = {15, 6, 23};</code> - Initializing bit fields</li>
+                <li><code>userStatus.isActive = 0;</code> - Modifying bit field value</li>
+                <li><code>sizeof(struct Status)</code> - Checking structure size</li>
+            </ul>
+
+            <h2>Bit Field Characteristics</h2>
+            <ul>
+                <li>Bit fields must be declared as int, unsigned int, or signed int</li>
+                <li>Total bits in a structure must not exceed the size of the base type</li>
+                <li>Unnamed bit fields can be used for padding</li>
+                <li>Zero-width bit fields force alignment to next unit</li>
+                <li>Bit fields cannot be arrays or have addresses</li>
+                <li>Bit fields are packed from right to left</li>
+                <li>Bit fields can be used in unions</li>
+            </ul>
+
+            <h2>Bit Field Best Practices</h2>
+            <ul>
+                <li>Use unsigned int for bit fields unless negative values are needed</li>
+                <li>Keep bit field sizes as small as possible</li>
+                <li>Use unnamed bit fields for padding when needed</li>
+                <li>Document the purpose of each bit field</li>
+                <li>Consider portability when using bit fields</li>
+                <li>Use bit fields for flags and small values</li>
+                <li>Be aware of implementation-dependent behavior</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What are the advantages of using bit fields?</p>
+                    <p>A: Bit fields allow for memory optimization by using only the required number of bits for each field. They are particularly useful for flags, status bits, and other small data that doesn't need a full byte of storage.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Can I take the address of a bit field?</p>
+                    <p>A: No, you cannot take the address of a bit field because they may not start at a byte boundary. This is one of the limitations of bit fields in C.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How are bit fields stored in memory?</p>
+                    <p>A: Bit fields are packed from right to left (least significant bit to most significant bit) within their storage unit. However, the exact layout can be implementation-dependent.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: When should I use bit fields instead of bitwise operations?</p>
+                    <p>A: Use bit fields when you need to work with individual bits in a more structured way, especially when dealing with multiple related flags. Use bitwise operations when you need more control over the bit manipulation or when working with hardware registers.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="typedef.html">Next: Typedef</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

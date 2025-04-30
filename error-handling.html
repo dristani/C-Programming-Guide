@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>25. Error Handling</h1>
+            <p>Understanding error handling in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Error Handling</h2>
+            <p>Error handling in C is primarily done through return values, global variables (errno), and signal handling. C provides several mechanisms to detect and handle errors, including standard library functions that set errno, and the ability to define custom error codes and handlers.</p>
+
+            <h2>Error Handling Mechanisms</h2>
+            <table>
+                <tr>
+                    <th>Mechanism</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Return Values</td>
+                    <td>Functions return error codes</td>
+                    <td><code>if (fopen() == NULL)</code></td>
+                </tr>
+                <tr>
+                    <td>errno</td>
+                    <td>Global error number</td>
+                    <td><code>if (errno == ENOENT)</code></td>
+                </tr>
+                <tr>
+                    <td>perror()</td>
+                    <td>Print error message</td>
+                    <td><code>perror("Error");</code></td>
+                </tr>
+                <tr>
+                    <td>strerror()</td>
+                    <td>Get error string</td>
+                    <td><code>strerror(errno)</code></td>
+                </tr>
+                <tr>
+                    <td>assert()</td>
+                    <td>Debug assertions</td>
+                    <td><code>assert(ptr != NULL);</code></td>
+                </tr>
+                <tr>
+                    <td>signal()</td>
+                    <td>Handle signals</td>
+                    <td><code>signal(SIGSEGV, handler);</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;signal.h&gt;
+
+// Custom error codes
+#define ERROR_FILE_NOT_FOUND 1
+#define ERROR_INVALID_INPUT 2
+#define ERROR_MEMORY_ALLOC 3
+
+// Signal handler
+void handle_sigsegv(int sig) {
+    printf("Segmentation fault occurred!\n");
+    exit(EXIT_FAILURE);
+}
+
+// Function with error handling
+int process_file(const char* filename) {
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return ERROR_FILE_NOT_FOUND;
+    }
+    
+    // Read file content
+    char buffer[100];
+    if (fgets(buffer, sizeof(buffer), file) == NULL) {
+        if (feof(file)) {
+            printf("End of file reached\n");
+        } else {
+            perror("Error reading file");
+            fclose(file);
+            return ERROR_INVALID_INPUT;
+        }
+    }
+    
+    fclose(file);
+    return 0;
+}
+
+// Function with memory error handling
+int* allocate_array(int size) {
+    int* arr = (int*)malloc(size * sizeof(int));
+    if (arr == NULL) {
+        fprintf(stderr, "Memory allocation failed: %s\n", strerror(errno));
+        return NULL;
+    }
+    return arr;
+}
+
+int main() {
+    // Set up signal handler
+    signal(SIGSEGV, handle_sigsegv);
+    
+    // Example 1: File handling with error checking
+    int result = process_file("nonexistent.txt");
+    if (result != 0) {
+        printf("File processing failed with error code: %d\n", result);
+    }
+    
+    // Example 2: Memory allocation with error checking
+    int* numbers = allocate_array(100);
+    if (numbers == NULL) {
+        printf("Failed to allocate memory\n");
+        return ERROR_MEMORY_ALLOC;
+    }
+    
+    // Example 3: Using assert for debugging
+    int* ptr = malloc(10 * sizeof(int));
+    assert(ptr != NULL);  // Will abort if ptr is NULL
+    
+    // Example 4: Using errno
+    errno = 0;
+    double result = sqrt(-1.0);
+    if (errno == EDOM) {
+        printf("Domain error occurred\n");
+    }
+    
+    // Clean up
+    free(numbers);
+    free(ptr);
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>errno</code> - Global variable for error codes</li>
+                <li><code>perror()</code> - Prints error message with description</li>
+                <li><code>strerror()</code> - Converts error code to string</li>
+                <li><code>assert()</code> - Debugging assertions</li>
+                <li><code>signal()</code> - Handles system signals</li>
+                <li>Custom error codes for specific cases</li>
+                <li>Memory allocation error checking</li>
+                <li>File operation error handling</li>
+            </ul>
+
+            <h2>Error Handling Characteristics</h2>
+            <ul>
+                <li>Return values indicate success/failure</li>
+                <li>errno provides detailed error information</li>
+                <li>Signals handle exceptional conditions</li>
+                <li>Assertions help with debugging</li>
+                <li>Custom error codes for specific cases</li>
+                <li>Error messages can be localized</li>
+                <li>Memory errors must be handled explicitly</li>
+            </ul>
+
+            <h2>Error Handling Best Practices</h2>
+            <ul>
+                <li>Always check return values</li>
+                <li>Use meaningful error messages</li>
+                <li>Clean up resources on error</li>
+                <li>Document error conditions</li>
+                <li>Use appropriate error codes</li>
+                <li>Handle signals properly</li>
+                <li>Consider using error handling libraries</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between errno and return values?</p>
+                    <p>A: Return values are function-specific and indicate success/failure, while errno is a global variable that provides more detailed error information. errno is typically used with standard library functions, while return values are used for custom functions.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: When should I use assert()?</p>
+                    <p>A: assert() should be used during development and debugging to catch programming errors. It's typically removed in production code using the NDEBUG macro. Use assert() for conditions that should never occur if the program is working correctly.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I handle memory allocation errors?</p>
+                    <p>A: Always check if malloc() or calloc() return NULL. If memory allocation fails, either handle the error gracefully (freeing any previously allocated resources) or terminate the program with an appropriate error message.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What are some common error handling patterns?</p>
+                    <p>A: Common patterns include: using goto for cleanup on error, returning error codes through function parameters, using a global error state, implementing custom error types, and using setjmp/longjmp for non-local jumps in error cases.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="file-handling.html">Next: File Handling</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

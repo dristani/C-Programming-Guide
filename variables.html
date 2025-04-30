@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>3. Variables</h1>
+            <p>Understanding variables in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Variables</h2>
+            <p>Variables are fundamental building blocks in C programming. They are used to store data that can be modified during program execution. Each variable has a specific type, name, and value.</p>
+
+            <h2>Variable Declaration and Initialization</h2>
+            <p>In C, variables must be declared before they can be used. They can be initialized at the time of declaration or later in the program.</p>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    // Variable declaration
+    int number;
+    float price;
+    char letter;
+    
+    // Variable initialization
+    number = 42;
+    price = 99.99;
+    letter = 'A';
+    
+    // Declaration and initialization in one line
+    int age = 25;
+    double pi = 3.14159;
+    
+    // Multiple variables of same type
+    int x = 10, y = 20, z = 30;
+    
+    // Printing variables
+    printf("Number: %d\n", number);
+    printf("Price: %.2f\n", price);
+    printf("Letter: %c\n", letter);
+    printf("Age: %d\n", age);
+    printf("Pi: %.5lf\n", pi);
+    printf("Sum: %d\n", x + y + z);
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>int number;</code> - Declares an integer variable named 'number'</li>
+                <li><code>float price;</code> - Declares a floating-point variable named 'price'</li>
+                <li><code>char letter;</code> - Declares a character variable named 'letter'</li>
+                <li><code>number = 42;</code> - Initializes the 'number' variable with value 42</li>
+                <li><code>int age = 25;</code> - Declares and initializes an integer variable in one line</li>
+                <li><code>int x = 10, y = 20, z = 30;</code> - Declares and initializes multiple variables of the same type</li>
+                <li><code>printf()</code> statements demonstrate how to print different types of variables</li>
+            </ul>
+
+            <h2>Variable Naming Rules</h2>
+            <ul>
+                <li>Variable names can contain letters, digits, and underscores</li>
+                <li>Must begin with a letter or underscore</li>
+                <li>Cannot be a C keyword (e.g., int, float, return)</li>
+                <li>Are case-sensitive (e.g., 'age' and 'Age' are different variables)</li>
+                <li>Should be meaningful and descriptive</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between declaration and initialization?</p>
+                    <p>A: Declaration tells the compiler about the variable's type and name, while initialization assigns an initial value to the variable.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Can I change a variable's type after declaration?</p>
+                    <p>A: No, once a variable is declared with a specific type, it cannot be changed to another type.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What happens if I use an uninitialized variable?</p>
+                    <p>A: Using an uninitialized variable leads to undefined behavior. The variable may contain garbage values.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Can I declare multiple variables of different types in one line?</p>
+                    <p>A: No, you can only declare multiple variables of the same type in one line.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="constants.html">Next: Constants</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

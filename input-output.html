@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input and Output - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>18. Input and Output</h1>
+            <p>Understanding input and output operations in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Input and Output</h2>
+            <p>Input and Output (I/O) operations in C are performed using standard library functions. The stdio.h header file provides functions for reading input from the user and displaying output to the screen. C supports both formatted and unformatted I/O operations.</p>
+
+            <h2>I/O Operations</h2>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Function</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Formatted Output</td>
+                    <td>printf()</td>
+                    <td>Displays formatted output</td>
+                    <td><code>printf("Value: %d", num);</code></td>
+                </tr>
+                <tr>
+                    <td>Formatted Input</td>
+                    <td>scanf()</td>
+                    <td>Reads formatted input</td>
+                    <td><code>scanf("%d", &num);</code></td>
+                </tr>
+                <tr>
+                    <td>Character Output</td>
+                    <td>putchar()</td>
+                    <td>Displays a single character</td>
+                    <td><code>putchar('A');</code></td>
+                </tr>
+                <tr>
+                    <td>Character Input</td>
+                    <td>getchar()</td>
+                    <td>Reads a single character</td>
+                    <td><code>char c = getchar();</code></td>
+                </tr>
+                <tr>
+                    <td>String Output</td>
+                    <td>puts()</td>
+                    <td>Displays a string</td>
+                    <td><code>puts("Hello");</code></td>
+                </tr>
+                <tr>
+                    <td>String Input</td>
+                    <td>gets()</td>
+                    <td>Reads a string</td>
+                    <td><code>gets(str);</code></td>
+                </tr>
+            </table>
+
+            <h2>Format Specifiers</h2>
+            <table>
+                <tr>
+                    <th>Specifier</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>%d</td>
+                    <td>int</td>
+                    <td>Decimal integer</td>
+                </tr>
+                <tr>
+                    <td>%f</td>
+                    <td>float</td>
+                    <td>Floating point</td>
+                </tr>
+                <tr>
+                    <td>%c</td>
+                    <td>char</td>
+                    <td>Character</td>
+                </tr>
+                <tr>
+                    <td>%s</td>
+                    <td>char[]</td>
+                    <td>String</td>
+                </tr>
+                <tr>
+                    <td>%lf</td>
+                    <td>double</td>
+                    <td>Double precision</td>
+                </tr>
+                <tr>
+                    <td>%p</td>
+                    <td>void*</td>
+                    <td>Pointer address</td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    // Basic I/O operations
+    int num;
+    float fnum;
+    char ch;
+    char str[50];
+    
+    // Formatted input
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+    
+    printf("Enter a float: ");
+    scanf("%f", &fnum);
+    
+    printf("Enter a character: ");
+    scanf(" %c", &ch);  // Note the space before %c
+    
+    printf("Enter a string: ");
+    scanf("%s", str);
+    
+    // Formatted output
+    printf("\nYou entered:\n");
+    printf("Integer: %d\n", num);
+    printf("Float: %.2f\n", fnum);
+    printf("Character: %c\n", ch);
+    printf("String: %s\n", str);
+    
+    // Character I/O
+    printf("\nEnter another character: ");
+    ch = getchar();  // Clears the newline
+    ch = getchar();  // Gets the actual character
+    printf("You entered: ");
+    putchar(ch);
+    printf("\n");
+    
+    // String I/O
+    printf("\nEnter another string: ");
+    scanf(" %[^\n]", str);  // Reads until newline
+    printf("You entered: ");
+    puts(str);
+    
+    // Advanced formatting
+    printf("\nFormatted Output Examples:\n");
+    printf("Integer with width: %5d\n", num);
+    printf("Float with precision: %.3f\n", fnum);
+    printf("Hexadecimal: %x\n", num);
+    printf("Octal: %o\n", num);
+    printf("Scientific notation: %e\n", fnum);
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>scanf("%d", &num);</code> - Reads an integer from input</li>
+                <li><code>scanf(" %c", &ch);</code> - Reads a character (note the space)</li>
+                <li><code>scanf("%s", str);</code> - Reads a string</li>
+                <li><code>printf("%.2f", fnum);</code> - Prints float with 2 decimal places</li>
+                <li><code>ch = getchar();</code> - Reads a single character</li>
+                <li><code>puts(str);</code> - Prints a string with newline</li>
+            </ul>
+
+            <h2>I/O Characteristics</h2>
+            <ul>
+                <li>Standard I/O is buffered</li>
+                <li>Formatted I/O uses format specifiers</li>
+                <li>Input functions return values indicating success/failure</li>
+                <li>Output functions return number of characters printed</li>
+                <li>I/O operations can be redirected</li>
+                <li>File I/O uses similar functions</li>
+                <li>Error handling is important for robust I/O</li>
+            </ul>
+
+            <h2>I/O Best Practices</h2>
+            <ul>
+                <li>Always check return values of input functions</li>
+                <li>Use appropriate format specifiers</li>
+                <li>Handle buffer overflow in string input</li>
+                <li>Clear input buffer when needed</li>
+                <li>Use meaningful prompts for user input</li>
+                <li>Format output for readability</li>
+                <li>Handle errors gracefully</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between puts() and printf()?</p>
+                    <p>A: puts() automatically adds a newline character at the end and can only print strings, while printf() is more flexible and can print formatted output of various types but doesn't automatically add a newline.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Why do we need to use & with scanf() for variables?</p>
+                    <p>A: The & operator is used to get the address of a variable. scanf() needs the address of variables to store the input values directly in memory. This is why we use & for basic data types, but not for arrays (like strings) which are already pointers.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How can I clear the input buffer?</p>
+                    <p>A: You can clear the input buffer using <code>while ((getchar()) != '\n');</code> or <code>fflush(stdin);</code> (though fflush(stdin) is not standard C). This is often needed after using scanf() to remove any remaining characters in the buffer.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What are the common format specifiers in C?</p>
+                    <p>A: Common format specifiers include %d for integers, %f for floats, %c for characters, %s for strings, %lf for doubles, %p for pointers, %x for hexadecimal, and %o for octal. You can also use modifiers like %.2f for precision or %5d for width.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="header-files.html">Next: Header Files</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

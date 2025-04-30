@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strings - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e83e8c;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>13. Strings</h1>
+            <p>Understanding strings in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Strings</h2>
+            <p>In C, strings are arrays of characters terminated by a null character ('\0'). They are fundamental for text processing and manipulation. Understanding string handling is crucial for many C programming tasks.</p>
+
+            <h2>String Operations</h2>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Declaration</td>
+                    <td>Creating a string</td>
+                    <td><code>char str[20];</code></td>
+                </tr>
+                <tr>
+                    <td>Initialization</td>
+                    <td>Assigning value to string</td>
+                    <td><code>char str[] = "Hello";</code></td>
+                </tr>
+                <tr>
+                    <td>String Length</td>
+                    <td>Getting string length</td>
+                    <td><code>strlen(str);</code></td>
+                </tr>
+                <tr>
+                    <td>String Copy</td>
+                    <td>Copying one string to another</td>
+                    <td><code>strcpy(dest, src);</code></td>
+                </tr>
+                <tr>
+                    <td>String Concatenation</td>
+                    <td>Joining two strings</td>
+                    <td><code>strcat(str1, str2);</code></td>
+                </tr>
+                <tr>
+                    <td>String Comparison</td>
+                    <td>Comparing two strings</td>
+                    <td><code>strcmp(str1, str2);</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    // String declaration and initialization
+    char str1[20] = "Hello";
+    char str2[20] = "World";
+    char str3[20];
+    
+    // String length
+    printf("Length of str1: %lu\n", strlen(str1));
+    
+    // String copy
+    strcpy(str3, str1);
+    printf("str3 after copy: %s\n", str3);
+    
+    // String concatenation
+    strcat(str1, " ");
+    strcat(str1, str2);
+    printf("str1 after concatenation: %s\n", str1);
+    
+    // String comparison
+    if (strcmp(str1, str2) == 0) {
+        printf("Strings are equal\n");
+    } else {
+        printf("Strings are not equal\n");
+    }
+    
+    // String input
+    char name[50];
+    printf("Enter your name: ");
+    fgets(name, 50, stdin);
+    name[strlen(name) - 1] = '\0';  // Remove newline
+    printf("Hello, %s!\n", name);
+    
+    // String manipulation
+    char text[] = "C Programming";
+    printf("Original text: %s\n", text);
+    
+    // Convert to uppercase
+    for(int i = 0; text[i] != '\0'; i++) {
+        if(text[i] >= 'a' && text[i] <= 'z') {
+            text[i] = text[i] - 32;
+        }
+    }
+    printf("Uppercase text: %s\n", text);
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>char str1[20] = "Hello";</code> - String declaration and initialization</li>
+                <li><code>strlen(str1)</code> - Returns the length of the string (excluding null terminator)</li>
+                <li><code>strcpy(str3, str1)</code> - Copies str1 to str3</li>
+                <li><code>strcat(str1, str2)</code> - Appends str2 to str1</li>
+                <li><code>strcmp(str1, str2)</code> - Compares two strings (returns 0 if equal)</li>
+                <li><code>fgets(name, 50, stdin)</code> - Safe way to read string input</li>
+                <li><code>text[i] = text[i] - 32</code> - Converting lowercase to uppercase</li>
+            </ul>
+
+            <h2>String Characteristics</h2>
+            <ul>
+                <li>Strings are null-terminated character arrays</li>
+                <li>String literals are stored in read-only memory</li>
+                <li>String functions are available in string.h header</li>
+                <li>Strings can be manipulated using pointers</li>
+                <li>String length doesn't include the null terminator</li>
+                <li>Strings can be initialized using string literals</li>
+                <li>Strings can be passed to functions as character arrays</li>
+            </ul>
+
+            <h2>String Best Practices</h2>
+            <ul>
+                <li>Always allocate enough space for strings (including null terminator)</li>
+                <li>Use fgets() instead of gets() for input</li>
+                <li>Check string lengths before operations</li>
+                <li>Use strncpy() instead of strcpy() for safer copying</li>
+                <li>Initialize strings properly</li>
+                <li>Handle string termination correctly</li>
+                <li>Be careful with string literals and memory allocation</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between char array and string?</p>
+                    <p>A: A char array is just an array of characters, while a string is a char array that is null-terminated. All strings are char arrays, but not all char arrays are strings.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Why is gets() unsafe?</p>
+                    <p>A: gets() doesn't check the buffer size, which can lead to buffer overflow. Always use fgets() instead, which allows you to specify the maximum number of characters to read.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I compare strings in C?</p>
+                    <p>A: Use strcmp() function from string.h. It returns 0 if strings are equal, negative if first string is less than second, and positive if first string is greater than second.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I convert a string to a number?</p>
+                    <p>A: Use atoi() for integers, atof() for floating-point numbers, or strtol()/strtod() for more control over the conversion process.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="structures.html">Next: Structures</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

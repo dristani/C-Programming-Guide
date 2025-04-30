@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Handling - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>26. File Handling</h1>
+            <p>Understanding file handling in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to File Handling</h2>
+            <p>File handling in C allows programs to read from and write to files. The standard library provides functions for file operations through the stdio.h header. Files can be opened in different modes (read, write, append) and can be processed using various functions for reading and writing data.</p>
+
+            <h2>File Operations</h2>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Function</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Open File</td>
+                    <td>fopen()</td>
+                    <td>Opens a file</td>
+                    <td><code>FILE* fp = fopen("file.txt", "r");</code></td>
+                </tr>
+                <tr>
+                    <td>Close File</td>
+                    <td>fclose()</td>
+                    <td>Closes a file</td>
+                    <td><code>fclose(fp);</code></td>
+                </tr>
+                <tr>
+                    <td>Read Character</td>
+                    <td>fgetc()</td>
+                    <td>Reads a character</td>
+                    <td><code>char c = fgetc(fp);</code></td>
+                </tr>
+                <tr>
+                    <td>Write Character</td>
+                    <td>fputc()</td>
+                    <td>Writes a character</td>
+                    <td><code>fputc('A', fp);</code></td>
+                </tr>
+                <tr>
+                    <td>Read String</td>
+                    <td>fgets()</td>
+                    <td>Reads a string</td>
+                    <td><code>fgets(str, 100, fp);</code></td>
+                </tr>
+                <tr>
+                    <td>Write String</td>
+                    <td>fputs()</td>
+                    <td>Writes a string</td>
+                    <td><code>fputs("Hello", fp);</code></td>
+                </tr>
+                <tr>
+                    <td>Formatted Read</td>
+                    <td>fscanf()</td>
+                    <td>Reads formatted data</td>
+                    <td><code>fscanf(fp, "%d", &num);</code></td>
+                </tr>
+                <tr>
+                    <td>Formatted Write</td>
+                    <td>fprintf()</td>
+                    <td>Writes formatted data</td>
+                    <td><code>fprintf(fp, "%d", num);</code></td>
+                </tr>
+            </table>
+
+            <h2>File Modes</h2>
+            <table>
+                <tr>
+                    <th>Mode</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>"r"</td>
+                    <td>Read mode (file must exist)</td>
+                </tr>
+                <tr>
+                    <td>"w"</td>
+                    <td>Write mode (creates or truncates)</td>
+                </tr>
+                <tr>
+                    <td>"a"</td>
+                    <td>Append mode (creates or appends)</td>
+                </tr>
+                <tr>
+                    <td>"r+"</td>
+                    <td>Read and write mode</td>
+                </tr>
+                <tr>
+                    <td>"w+"</td>
+                    <td>Read and write mode (creates or truncates)</td>
+                </tr>
+                <tr>
+                    <td>"a+"</td>
+                    <td>Read and append mode</td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    FILE *fp;
+    char filename[] = "example.txt";
+    char buffer[100];
+    int num;
+
+    // Writing to a file
+    fp = fopen(filename, "w");
+    if (fp == NULL) {
+        perror("Error opening file for writing");
+        return 1;
+    }
+
+    fprintf(fp, "Hello, World!\n");
+    fprintf(fp, "This is a test file.\n");
+    fprintf(fp, "Number: %d\n", 42);
+    fclose(fp);
+
+    // Reading from a file
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        perror("Error opening file for reading");
+        return 1;
+    }
+
+    // Read line by line
+    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+        printf("%s", buffer);
+    }
+
+    // Reset file pointer to beginning
+    rewind(fp);
+
+    // Read formatted data
+    while (fscanf(fp, "Number: %d\n", &num) == 1) {
+        printf("Found number: %d\n", num);
+    }
+
+    fclose(fp);
+
+    // Binary file operations
+    struct Student {
+        char name[50];
+        int age;
+        float gpa;
+    } student = {"John Doe", 20, 3.8};
+
+    // Write binary data
+    fp = fopen("student.dat", "wb");
+    if (fp == NULL) {
+        perror("Error opening binary file for writing");
+        return 1;
+    }
+    fwrite(&student, sizeof(struct Student), 1, fp);
+    fclose(fp);
+
+    // Read binary data
+    struct Student readStudent;
+    fp = fopen("student.dat", "rb");
+    if (fp == NULL) {
+        perror("Error opening binary file for reading");
+        return 1;
+    }
+    fread(&readStudent, sizeof(struct Student), 1, fp);
+    printf("Read student: %s, %d, %.2f\n", 
+           readStudent.name, readStudent.age, readStudent.gpa);
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>fopen()</code> - Opens a file in specified mode</li>
+                <li><code>fclose()</code> - Closes an open file</li>
+                <li><code>fprintf()</code> - Writes formatted data to file</li>
+                <li><code>fgets()</code> - Reads a line from file</li>
+                <li><code>fscanf()</code> - Reads formatted data from file</li>
+                <li><code>rewind()</code> - Resets file pointer to beginning</li>
+                <li><code>fwrite()</code> - Writes binary data to file</li>
+                <li><code>fread()</code> - Reads binary data from file</li>
+            </ul>
+
+            <h2>File Handling Characteristics</h2>
+            <ul>
+                <li>Text and binary file support</li>
+                <li>Different file opening modes</li>
+                <li>Sequential and random access</li>
+                <li>Error handling through return values</li>
+                <li>File pointer manipulation</li>
+                <li>Formatted and unformatted I/O</li>
+                <li>Buffer management</li>
+            </ul>
+
+            <h2>File Handling Best Practices</h2>
+            <ul>
+                <li>Always check file operations for errors</li>
+                <li>Close files after use</li>
+                <li>Use appropriate file modes</li>
+                <li>Handle file paths carefully</li>
+                <li>Check file existence before operations</li>
+                <li>Use proper buffer sizes</li>
+                <li>Consider file permissions</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between text and binary files?</p>
+                    <p>A: Text files contain human-readable data and are processed line by line, while binary files contain raw data and are processed byte by byte. Binary files are more efficient for storing structured data like arrays or structures.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I handle large files?</p>
+                    <p>A: For large files, use buffered I/O operations, process data in chunks, and consider using memory-mapped files for very large files. Always check for available memory and handle potential overflow conditions.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between fgets() and fscanf()?</p>
+                    <p>A: fgets() reads a line of text including the newline character, while fscanf() reads formatted data according to specified format specifiers. fgets() is safer for reading strings as it prevents buffer overflow.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I handle file permissions?</p>
+                    <p>A: File permissions are typically handled by the operating system. In C, you can check if a file exists and is accessible using access() function, and set permissions using chmod() function (platform-dependent).</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="memory-management.html">Next: Memory Management</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

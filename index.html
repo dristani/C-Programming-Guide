@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .tutorial-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tutorial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .tutorial-item a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .tutorial-item a:hover {
+            color: #3498db;
+        }
+        .description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .home-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .home-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+        }
+        @media (max-width: 900px) {
+            .tutorial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>C Programming Tutorial</h1>
+            <a href="home.html" class="home-link">← Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Table of Contents</h2>
+            <div class="tutorial-grid">
+                <div class="tutorial-item">
+                    <a href="basic-syntax.html">1. Basic Syntax</a>
+                    <p class="description">Understanding the basic structure and syntax of C programs</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="variables.html">2. Variables</a>
+                    <p class="description">Understanding variables, data types, and variable declaration in C</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="constants.html">3. Constants</a>
+                    <p class="description">Working with constants and literals in C programming</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="storage-classes.html">4. Storage Classes</a>
+                    <p class="description">Understanding storage classes and variable scope in C</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="operators.html">5. Operators</a>
+                    <p class="description">Learning about arithmetic, relational, logical, and bitwise operators</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="decision-making.html">6. Decision Making</a>
+                    <p class="description">Using if, if-else, switch, and nested if statements</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="loops.html">7. Loops</a>
+                    <p class="description">Understanding while, do-while, for, and nested loops</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="functions.html">8. Functions</a>
+                    <p class="description">Creating and using functions in C programming</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="scope-rules.html">9. Scope Rules</a>
+                    <p class="description">Understanding variable scope and lifetime in C</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="arrays.html">10. Arrays</a>
+                    <p class="description">Working with single and multi-dimensional arrays</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="pointers.html">11. Pointers</a>
+                    <p class="description">Understanding pointers and pointer arithmetic</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="strings.html">12. Strings</a>
+                    <p class="description">Working with strings and string manipulation functions</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="structures.html">13. Structures</a>
+                    <p class="description">Creating and using structures in C programming</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="unions.html">14. Unions</a>
+                    <p class="description">Understanding unions and their applications</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="bit-fields.html">15. Bit Fields</a>
+                    <p class="description">Working with bit fields in structures</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="typedef.html">16. Typedef</a>
+                    <p class="description">Using typedef to create type aliases</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="input-output.html">17. Input and Output</a>
+                    <p class="description">Understanding input/output operations in C</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="header-files.html">18. Header Files</a>
+                    <p class="description">Creating and using header files in C</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="recursion.html">19. Recursion</a>
+                    <p class="description">Understanding recursive functions and their applications</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="variable-arguments.html">20. Variable Arguments</a>
+                    <p class="description">Working with variable number of arguments in functions</p>
+                </div>
+                <div class="tutorial-item">
+                    <a href="memory-management.html">21. Memory Management</a>
+                    <p class="description">Understanding dynamic memory allocation and management</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

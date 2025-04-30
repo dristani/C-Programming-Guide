@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structures - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>14. Structures</h1>
+            <p>Understanding structures in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Structures</h2>
+            <p>Structures in C are user-defined data types that allow you to combine data items of different kinds. They are used to create complex data types that can group related variables together.</p>
+
+            <h2>Structure Operations</h2>
+            <table>
+                <tr>
+                    <th>Operation</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Declaration</td>
+                    <td>Defining a structure type</td>
+                    <td><code>struct Student { ... };</code></td>
+                </tr>
+                <tr>
+                    <td>Initialization</td>
+                    <td>Creating structure variables</td>
+                    <td><code>struct Student s1;</code></td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>Accessing structure members</td>
+                    <td><code>s1.roll_no</code></td>
+                </tr>
+                <tr>
+                    <td>Pointer Access</td>
+                    <td>Accessing via structure pointer</td>
+                    <td><code>ptr->roll_no</code></td>
+                </tr>
+                <tr>
+                    <td>Array of Structures</td>
+                    <td>Creating multiple structures</td>
+                    <td><code>struct Student class[50];</code></td>
+                </tr>
+                <tr>
+                    <td>Nested Structures</td>
+                    <td>Structures within structures</td>
+                    <td><code>struct Address { ... };</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Structure definition
+struct Student {
+    int roll_no;
+    char name[50];
+    float marks;
+    struct Address {
+        char street[50];
+        char city[30];
+        int pin;
+    } address;
+};
+
+int main() {
+    // Structure variable declaration and initialization
+    struct Student s1 = {
+        .roll_no = 101,
+        .marks = 85.5,
+        .address = {
+            .street = "123 Main St",
+            .city = "New York",
+            .pin = 10001
+        }
+    };
+    strcpy(s1.name, "John Doe");
+    
+    // Accessing structure members
+    printf("Student Details:\n");
+    printf("Roll No: %d\n", s1.roll_no);
+    printf("Name: %s\n", s1.name);
+    printf("Marks: %.2f\n", s1.marks);
+    printf("Address: %s, %s - %d\n", 
+           s1.address.street, 
+           s1.address.city, 
+           s1.address.pin);
+    
+    // Array of structures
+    struct Student class[3];
+    for(int i = 0; i < 3; i++) {
+        printf("\nEnter details for student %d:\n", i+1);
+        printf("Roll No: ");
+        scanf("%d", &class[i].roll_no);
+        printf("Name: ");
+        scanf("%s", class[i].name);
+        printf("Marks: ");
+        scanf("%f", &class[i].marks);
+    }
+    
+    // Structure pointer
+    struct Student *ptr = &s1;
+    printf("\nAccessing via pointer:\n");
+    printf("Name: %s\n", ptr->name);
+    printf("Marks: %.2f\n", ptr->marks);
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>struct Student { ... };</code> - Structure definition with nested Address structure</li>
+                <li><code>struct Student s1 = { ... };</code> - Structure variable initialization</li>
+                <li><code>s1.roll_no</code> - Accessing structure members using dot operator</li>
+                <li><code>struct Student class[3]</code> - Array of structures</li>
+                <li><code>ptr->name</code> - Accessing structure members using pointer</li>
+                <li><code>s1.address.street</code> - Accessing nested structure members</li>
+            </ul>
+
+            <h2>Structure Characteristics</h2>
+            <ul>
+                <li>Structures can contain different data types</li>
+                <li>Structure members are accessed using dot operator</li>
+                <li>Structure pointers use arrow operator (->)</li>
+                <li>Structures can be nested</li>
+                <li>Structures can be passed to functions</li>
+                <li>Structures can be returned from functions</li>
+                <li>Structures can be used to create complex data types</li>
+            </ul>
+
+            <h2>Structure Best Practices</h2>
+            <ul>
+                <li>Use meaningful names for structures and members</li>
+                <li>Initialize structure variables properly</li>
+                <li>Use typedef for cleaner code</li>
+                <li>Pass large structures by pointer</li>
+                <li>Keep related data together in structures</li>
+                <li>Document structure purpose and usage</li>
+                <li>Consider memory alignment and padding</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between structure and union?</p>
+                    <p>A: In a structure, each member has its own memory location, while in a union, all members share the same memory location. Structures are used when you need to store different types of data together, while unions are used when you need to store only one type of data at a time.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I pass a structure to a function?</p>
+                    <p>A: You can pass structures to functions by value (copy) or by reference (pointer). For large structures, it's better to pass by pointer to avoid copying the entire structure. Use the arrow operator (->) to access members when using pointers.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is structure padding?</p>
+                    <p>A: Structure padding is the process of adding extra bytes between structure members to align them according to the system's memory alignment requirements. This can affect the size of the structure and should be considered when working with memory-sensitive applications.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: How do I use typedef with structures?</p>
+                    <p>A: typedef can be used to create an alias for a structure type. For example: <code>typedef struct Student Student;</code> allows you to declare variables as <code>Student s1;</code> instead of <code>struct Student s1;</code>.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="unions.html">Next: Unions</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

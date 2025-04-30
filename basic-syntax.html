@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Syntax - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .tips {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .tips h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>1. Basic Syntax</h1>
+            <p>Understanding the fundamental structure of C programs</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to C Syntax</h2>
+            <p>C programming language follows a specific syntax that defines how programs are written and structured. Understanding this syntax is crucial for writing correct and efficient C programs.</p>
+
+            <h2>Basic Structure of a C Program</h2>
+            <p>Every C program follows a basic structure that includes:</p>
+            <ul>
+                <li>Preprocessor directives</li>
+                <li>Main function</li>
+                <li>Program statements</li>
+                <li>Comments</li>
+            </ul>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+// This is a comment
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>#include &lt;stdio.h&gt;</code> - Includes the standard input/output header file</li>
+                <li><code>// This is a comment</code> - Single-line comment</li>
+                <li><code>int main()</code> - Main function declaration</li>
+                <li><code>printf("Hello, World!\n");</code> - Output statement</li>
+                <li><code>return 0;</code> - Indicates successful program execution</li>
+            </ul>
+
+            <h2>Key Syntax Rules</h2>
+            <ul>
+                <li>Every statement ends with a semicolon (;)</li>
+                <li>Code blocks are enclosed in curly braces {}</li>
+                <li>Header files are included using #include directive</li>
+                <li>Comments can be single-line (//) or multi-line (/* */)</li>
+                <li>Function names are followed by parentheses ()</li>
+            </ul>
+
+            <div class="tips">
+                <h3>Tips and Best Practices</h3>
+                <ul>
+                    <li>Always include necessary header files</li>
+                    <li>Use meaningful variable and function names</li>
+                    <li>Properly indent your code for better readability</li>
+                    <li>Add comments to explain complex logic</li>
+                    <li>Follow consistent coding style</li>
+                </ul>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="data-types.html">Next: Data Types</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

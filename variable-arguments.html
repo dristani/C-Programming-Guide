@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable Arguments - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #2c3e50;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>21. Variable Arguments</h1>
+            <p>Understanding variable arguments in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Variable Arguments</h2>
+            <p>Variable arguments in C allow functions to accept a variable number of arguments. This is implemented using the `stdarg.h` header file, which provides macros and types for handling variable argument lists. The most common example is the `printf()` function, which can accept different numbers and types of arguments.</p>
+
+            <h2>Variable Argument Macros</h2>
+            <table>
+                <tr>
+                    <th>Macro</th>
+                    <th>Description</th>
+                    <th>Usage</th>
+                </tr>
+                <tr>
+                    <td>va_list</td>
+                    <td>Type for declaring a variable argument list</td>
+                    <td><code>va_list args;</code></td>
+                </tr>
+                <tr>
+                    <td>va_start</td>
+                    <td>Initializes a variable argument list</td>
+                    <td><code>va_start(args, last_fixed_arg);</code></td>
+                </tr>
+                <tr>
+                    <td>va_arg</td>
+                    <td>Retrieves the next argument from the list</td>
+                    <td><code>type arg = va_arg(args, type);</code></td>
+                </tr>
+                <tr>
+                    <td>va_end</td>
+                    <td>Cleans up the variable argument list</td>
+                    <td><code>va_end(args);</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+// Function to calculate average of variable number of integers
+double average(int count, ...) {
+    va_list args;
+    double sum = 0;
+    
+    // Initialize args to store all arguments after count
+    va_start(args, count);
+    
+    // Access all the arguments assigned to args
+    for (int i = 0; i < count; i++) {
+        sum += va_arg(args, int);
+    }
+    
+    // Clean up the variable argument list
+    va_end(args);
+    
+    return sum / count;
+}
+
+// Function to print formatted string with variable arguments
+void print_values(const char* format, ...) {
+    va_list args;
+    
+    va_start(args, format);
+    
+    while (*format != '\0') {
+        if (*format == 'd') {
+            int i = va_arg(args, int);
+            printf("%d ", i);
+        }
+        else if (*format == 'f') {
+            double d = va_arg(args, double);
+            printf("%.2f ", d);
+        }
+        else if (*format == 'c') {
+            char c = va_arg(args, int);
+            printf("%c ", c);
+        }
+        format++;
+    }
+    
+    va_end(args);
+    printf("\n");
+}
+
+// Function to find maximum of variable number of integers
+int max(int count, ...) {
+    va_list args;
+    int max_val = 0;
+    
+    va_start(args, count);
+    
+    if (count > 0) {
+        max_val = va_arg(args, int);
+        for (int i = 1; i < count; i++) {
+            int val = va_arg(args, int);
+            if (val > max_val)
+                max_val = val;
+        }
+    }
+    
+    va_end(args);
+    return max_val;
+}
+
+int main() {
+    // Average example
+    printf("Average of 1, 2, 3, 4, 5: %.2f\n", average(5, 1, 2, 3, 4, 5));
+    
+    // Print values example
+    printf("Printing values: ");
+    print_values("dffc", 10, 3.14, 2.71, 'A');
+    
+    // Maximum example
+    printf("Maximum of 5, 2, 8, 1, 9: %d\n", max(5, 5, 2, 8, 1, 9));
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>average()</code> - Function that calculates average of variable number of integers</li>
+                <li><code>print_values()</code> - Function that prints values based on format string</li>
+                <li><code>max()</code> - Function that finds maximum of variable number of integers</li>
+                <li><code>va_list</code> - Type for variable argument list</li>
+                <li><code>va_start()</code> - Initializes the argument list</li>
+                <li><code>va_arg()</code> - Retrieves next argument from list</li>
+                <li><code>va_end()</code> - Cleans up the argument list</li>
+            </ul>
+
+            <h2>Variable Argument Characteristics</h2>
+            <ul>
+                <li>Requires at least one fixed argument</li>
+                <li>Arguments are accessed in order</li>
+                <li>Type safety is the programmer's responsibility</li>
+                <li>Arguments are passed on the stack</li>
+                <li>No compile-time type checking</li>
+                <li>Can be used with different types of arguments</li>
+                <li>Requires careful handling of argument types</li>
+            </ul>
+
+            <h2>Variable Argument Best Practices</h2>
+            <ul>
+                <li>Always include a fixed argument to determine number of variable arguments</li>
+                <li>Use format strings to specify argument types</li>
+                <li>Always call va_end() after using variable arguments</li>
+                <li>Be careful with type conversions</li>
+                <li>Document expected argument types</li>
+                <li>Consider using alternative approaches for type safety</li>
+                <li>Handle errors gracefully</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: Why do we need a fixed argument in variable argument functions?</p>
+                    <p>A: A fixed argument is needed to determine where the variable arguments start and how many arguments are present. Without a fixed argument, there would be no way to know how to access the variable arguments.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Can we use variable arguments with different types?</p>
+                    <p>A: Yes, variable arguments can handle different types, but the function must know the type of each argument to retrieve it correctly. This is typically done using a format string or by passing type information as part of the fixed arguments.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What happens if we don't call va_end()?</p>
+                    <p>A: Not calling va_end() can lead to undefined behavior and potential memory leaks. The va_end() macro performs necessary cleanup of the variable argument list, so it should always be called after processing the arguments.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: Are variable arguments type-safe?</p>
+                    <p>A: No, variable arguments are not type-safe. The compiler cannot check the types of variable arguments at compile time. It's the programmer's responsibility to ensure that the correct types are passed and retrieved.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="memory-management.html">Next: Memory Management</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

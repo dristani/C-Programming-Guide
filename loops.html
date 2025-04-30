@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops - C Programming Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #e83e8c;
+        }
+        .nav-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .nav-links a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+        .faq {
+            background-color: #e8f4f8;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+        .faq h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>8. Loops</h1>
+            <p>Understanding loops in C programming</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>Introduction to Loops</h2>
+            <p>Loops in C programming allow you to execute a block of code repeatedly. They are essential for performing repetitive tasks efficiently. C provides several types of loops to handle different looping requirements.</p>
+
+            <h2>Types of Loops</h2>
+            <table>
+                <tr>
+                    <th>Loop Type</th>
+                    <th>Description</th>
+                    <th>Syntax</th>
+                </tr>
+                <tr>
+                    <td>while</td>
+                    <td>Executes code while condition is true</td>
+                    <td><code>while (condition) { /* code */ }</code></td>
+                </tr>
+                <tr>
+                    <td>do-while</td>
+                    <td>Executes code at least once, then repeats while condition is true</td>
+                    <td><code>do { /* code */ } while (condition);</code></td>
+                </tr>
+                <tr>
+                    <td>for</td>
+                    <td>Executes code a specific number of times</td>
+                    <td><code>for (init; condition; increment) { /* code */ }</code></td>
+                </tr>
+                <tr>
+                    <td>nested loops</td>
+                    <td>Loop inside another loop</td>
+                    <td><code>for (i=0; i<n; i++) { for (j=0; j<m; j++) { /* code */ } }</code></td>
+                </tr>
+            </table>
+
+            <h2>Example Program</h2>
+            <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i, j, n;
+    
+    // while loop
+    printf("While loop example:\n");
+    i = 1;
+    while (i <= 5) {
+        printf("%d ", i);
+        i++;
+    }
+    printf("\n\n");
+    
+    // do-while loop
+    printf("Do-while loop example:\n");
+    i = 1;
+    do {
+        printf("%d ", i);
+        i++;
+    } while (i <= 5);
+    printf("\n\n");
+    
+    // for loop
+    printf("For loop example:\n");
+    for (i = 1; i <= 5; i++) {
+        printf("%d ", i);
+    }
+    printf("\n\n");
+    
+    // Nested loops
+    printf("Nested loops example (Multiplication table):\n");
+    for (i = 1; i <= 5; i++) {
+        for (j = 1; j <= 5; j++) {
+            printf("%d\t", i * j);
+        }
+        printf("\n");
+    }
+    
+    // break and continue
+    printf("\nBreak and continue example:\n");
+    for (i = 1; i <= 10; i++) {
+        if (i == 5) {
+            break;  // Exit the loop
+        }
+        if (i % 2 == 0) {
+            continue;  // Skip even numbers
+        }
+        printf("%d ", i);
+    }
+    printf("\n");
+    
+    return 0;
+}</code></pre>
+
+            <h2>Code Explanation</h2>
+            <ul>
+                <li><code>while (i <= 5)</code> - Executes while i is less than or equal to 5</li>
+                <li><code>do { ... } while (i <= 5);</code> - Executes at least once, then checks condition</li>
+                <li><code>for (i = 1; i <= 5; i++)</code> - Initializes i to 1, runs while i ≤ 5, increments i after each iteration</li>
+                <li><code>for (i = 1; i <= 5; i++) { for (j = 1; j <= 5; j++) }</code> - Nested loops for creating a multiplication table</li>
+                <li><code>break;</code> - Exits the loop immediately</li>
+                <li><code>continue;</code> - Skips the current iteration and continues with the next</li>
+            </ul>
+
+            <h2>Loop Control Statements</h2>
+            <ul>
+                <li><strong>break</strong>: Terminates the loop immediately</li>
+                <li><strong>continue</strong>: Skips the current iteration and continues with the next</li>
+                <li><strong>goto</strong>: Jumps to a labeled statement (use with caution)</li>
+            </ul>
+
+            <h2>Loop Best Practices</h2>
+            <ul>
+                <li>Use for loops when you know the exact number of iterations</li>
+                <li>Use while loops when the number of iterations is unknown</li>
+                <li>Use do-while when you need to execute the loop at least once</li>
+                <li>Avoid infinite loops by ensuring the loop condition will eventually become false</li>
+                <li>Keep loop bodies small and focused</li>
+                <li>Use meaningful variable names for loop counters</li>
+                <li>Be careful with nested loops as they can quickly become complex</li>
+            </ul>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is the difference between while and do-while loops?</p>
+                    <p>A: A while loop checks the condition before executing the code, while a do-while loop executes the code at least once before checking the condition.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: When should I use a for loop instead of a while loop?</p>
+                    <p>A: Use a for loop when you know the exact number of iterations, and use a while loop when the number of iterations depends on a condition that may change during execution.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: What is an infinite loop and how can I avoid it?</p>
+                    <p>A: An infinite loop occurs when the loop condition never becomes false. To avoid it, ensure your loop condition will eventually be met and that variables in the condition are properly updated.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q: When should I use break and continue statements?</p>
+                    <p>A: Use break to exit a loop when a specific condition is met, and use continue to skip the current iteration when certain conditions are true. However, use them sparingly as they can make code harder to follow.</p>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+                <a href="functions.html">Next: Functions</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
