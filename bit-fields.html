@@ -105,6 +105,81 @@
         th {
             background-color: #f2f2f2;
         }
+        .student-info {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #3498db);
+            animation: gradient 3s linear infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .developer-info {
+            position: relative;
+            z-index: 1;
+        }
+        .developer-info p {
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .developer-info p:hover {
+            transform: translateX(10px);
+        }
+        .developer-info p:first-child {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .developer-info p:last-child {
+            font-style: italic;
+            color: #2ecc71;
+        }
     </style>
 </head>
 <body>
@@ -282,5 +357,17 @@ int main() {
             </div>
         </div>
     </div>
+
+    <footer class="student-info">
+        <div class="container">
+            <div class="info-card">
+                <div class="developer-info">
+                    <p>Designed and Developed by Tanisha Kavrani</p>
+                    <p>A student of Artificial Intelligence and Data Science in Maharashtra Institute of Technology</p>
+                    <p>Made for Coding Club</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

@@ -105,6 +105,81 @@
         th {
             background-color: #f2f2f2;
         }
+        .student-info {
+            background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #3498db);
+            animation: gradient 3s linear infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .developer-info {
+            position: relative;
+            z-index: 1;
+        }
+        .developer-info p {
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .developer-info p:hover {
+            transform: translateX(10px);
+        }
+        .developer-info p:first-child {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .developer-info p:last-child {
+            font-style: italic;
+            color: #2ecc71;
+        }
     </style>
 </head>
 <body>
@@ -150,80 +225,38 @@
             </table>
 
             <h2>Example Program</h2>
-            <pre><code>#include &lt;stdio.h&gt;
+            <div class="example">
+                <h3>Example Program:</h3>
+                <pre><code>#include &lt;stdio.h&gt;
 
-// Factorial using recursion
 int factorial(int n) {
-    // Base case
     if (n == 0 || n == 1)
         return 1;
-    // Recursive case
-    return n * factorial(n - 1);
-}
-
-// Fibonacci series using recursion
-int fibonacci(int n) {
-    // Base cases
-    if (n == 0)
-        return 0;
-    if (n == 1)
-        return 1;
-    // Recursive case
-    return fibonacci(n - 1) + fibonacci(n - 2);
-}
-
-// Binary search using recursion
-int binary_search(int arr[], int low, int high, int target) {
-    // Base case
-    if (low > high)
-        return -1;
-    
-    int mid = (low + high) / 2;
-    
-    if (arr[mid] == target)
-        return mid;
-    else if (arr[mid] < target)
-        return binary_search(arr, mid + 1, high, target);
     else
-        return binary_search(arr, low, mid - 1, target);
+        return n * factorial(n - 1);
 }
 
-// Tower of Hanoi using recursion
-void tower_of_hanoi(int n, char from, char to, char aux) {
-    if (n == 1) {
-        printf("Move disk 1 from %c to %c\n", from, to);
-        return;
-    }
-    tower_of_hanoi(n - 1, from, aux, to);
-    printf("Move disk %d from %c to %c\n", n, from, to);
-    tower_of_hanoi(n - 1, aux, to, from);
+int fibonacci(int n) {
+    if (n <= 1)
+        return n;
+    else
+        return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 int main() {
-    // Factorial example
     int num = 5;
-    printf("Factorial of %d is %d\n", num, factorial(num));
     
-    // Fibonacci example
-    printf("\nFibonacci series up to %d terms:\n", num);
-    for (int i = 0; i < num; i++)
+    printf("Factorial of %d: %d\n", num, factorial(num));
+    
+    printf("Fibonacci series up to %d terms:\n", num);
+    for(int i = 0; i < num; i++) {
         printf("%d ", fibonacci(i));
+    }
     printf("\n");
-    
-    // Binary search example
-    int arr[] = {2, 4, 6, 8, 10, 12, 14, 16};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    int target = 10;
-    int result = binary_search(arr, 0, size - 1, target);
-    printf("\nBinary search for %d: %s\n", 
-           target, result != -1 ? "Found" : "Not found");
-    
-    // Tower of Hanoi example
-    printf("\nTower of Hanoi solution for 3 disks:\n");
-    tower_of_hanoi(3, 'A', 'C', 'B');
     
     return 0;
 }</code></pre>
+            </div>
 
             <h2>Code Explanation</h2>
             <ul>
@@ -287,5 +320,17 @@ int main() {
             </div>
         </div>
     </div>
+
+    <footer class="student-info">
+        <div class="container">
+            <div class="info-card">
+                <div class="developer-info">
+                    <p>Designed and Developed by Tanisha Kavrani</p>
+                    <p>A student of Artificial Intelligence and Data Science in Maharashtra Institute of Technology</p>
+                    <p>Made for Coding Club</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 
